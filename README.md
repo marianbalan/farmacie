@@ -1,1 +1,1 @@
-# farmacie
+Sistem de Gestiune a Medicamentelor
