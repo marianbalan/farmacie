@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="629.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ComandaController">
+   <children>
+      <TableView fx:id="tableMedicamenteD" layoutX="39.0" layoutY="73.0" prefHeight="200.0" prefWidth="526.0">
+        <columns>
+          <TableColumn fx:id="columnNumeD" prefWidth="170.3999900817871" text="Nume" />
+          <TableColumn fx:id="columnTipD" minWidth="0.0" prefWidth="153.59999084472656" text="Tip" />
+            <TableColumn fx:id="columnProducatorD" prefWidth="127.20001220703125" text="Producator" />
+            <TableColumn fx:id="columnCantitateD" prefWidth="74.0" text="Cantitate" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableMedicamenteA" layoutX="39.0" layoutY="339.0" prefHeight="200.0" prefWidth="526.0">
+        <columns>
+          <TableColumn fx:id="columnNumeA" prefWidth="168.19997787475586" text="Nume" />
+          <TableColumn fx:id="columnTipA" prefWidth="156.40000915527344" text="Tip" />
+            <TableColumn fx:id="columnProducatorA" prefWidth="133.20001220703125" text="Producator" />
+            <TableColumn fx:id="columnCantitateA" prefWidth="65.20001220703125" text="Cantitate" />
+        </columns>
+      </TableView>
+      <Label layoutX="213.0" layoutY="46.0" text="Medicamente disponibile">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="176.0" layoutY="312.0" text="Medicamente adaugate in comanda">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="numeTextbox" layoutX="613.0" layoutY="207.0" />
+      <Button layoutX="659.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleCauta" text="Cautare" />
+      <Label layoutX="613.0" layoutY="185.0" text="Nume medicament:" />
+      <Spinner fx:id="cantitateSpinner" layoutX="613.0" layoutY="363.0" />
+      <Label layoutX="613.0" layoutY="339.0" text="Cantitate:" />
+      <Button layoutX="619.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleAdauga" prefHeight="26.0" prefWidth="143.0" text="Adaugare medicament" />
+      <Button layoutX="619.0" layoutY="469.0" mnemonicParsing="false" onAction="#handleActualizeaza" text="Actualizare medicament" />
+      <Button layoutX="619.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleElimina" prefHeight="26.0" prefWidth="143.0" text="Eliminare medicament" />
+      <Button layoutX="359.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleTrimite" text="Trimite">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

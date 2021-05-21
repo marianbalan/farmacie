@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FarmacistController">
+    <children>
+        <TableView fx:id="tableComenzi" layoutX="49.0" layoutY="56.0" onMouseClicked="#initMedicamente" prefHeight="255.0" prefWidth="263.0">
+            <columns>
+                <TableColumn fx:id="columnId" prefWidth="63.199981689453125" text="Nr. COM" />
+                <TableColumn fx:id="columnData" prefWidth="112.8000259399414" text="Data" />
+                <TableColumn fx:id="columnStatus" prefWidth="84.4000244140625" text="Status" />
+            </columns>
+        </TableView>
+        <Button layoutX="49.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleAccepta" text="Acceptare comanda" />
+        <Button layoutX="197.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleRefuza" text="Refuzare comanda" />
+        <Label layoutX="122.0" layoutY="27.0" text="Comenzi primite">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableMedicamente" layoutX="357.0" layoutY="56.0" prefHeight="255.0" prefWidth="382.0">
+            <columns>
+                <TableColumn fx:id="columnNume" prefWidth="126.20001220703125" text="Nume" />
+                <TableColumn fx:id="columnProducator" minWidth="9.20001220703125" prefWidth="100.19992065429688" text="Producator" />
+                <TableColumn fx:id="columnTip" prefWidth="80.800048828125" text="Tip" />
+                <TableColumn fx:id="columnCantitate" prefWidth="75.0" text="Cantitate" />
+            </columns>
+        </TableView>
+        <Label layoutX="500.0" layoutY="27.0" text="Medicamente">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+      <Button layoutX="357.0" layoutY="327.0" mnemonicParsing="false" text="Gestionare medicamente" />
+      <TextField fx:id="nameTextField" layoutX="591.0" layoutY="327.0" />
+      <Button layoutX="640.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout" textFill="#c70000" />
+    </children>
+</AnchorPane>
