@@ -4,7 +4,7 @@ import model.*;
 import model.validators.ValidationException;
 import model.validators.Validator;
 import repository.*;
-import utils.events.ComandaChangeEvent;
+import utils.events.ChangeEvent;
 import utils.events.Event;
 import utils.events.EventType;
 import utils.observer.Observable;
@@ -54,15 +54,15 @@ public class Service  implements Observable {
         }};
     }
 
-    public Iterable<Comanda> findAllOrders() throws ServicesException{
+    public Iterable<Comanda> findAllOrders() {
         return comandaRepository.findAll();
     }
 
-    public Iterable<Comanda> findMyOrders(Medic medic) throws ServicesException {
+    public Iterable<Comanda> findMyOrders(Medic medic) {
         return comandaRepository.findMyOrders(medic.getUsername());
     }
 
-    public Iterable<Medicament> findAllMedicamente() throws ServicesException {
+    public Iterable<Medicament> findAllMedicamente() {
         return medicamentRepository.findAll();
     }
 
@@ -83,9 +83,9 @@ public class Service  implements Observable {
 
     public void anuleazaComanda(Comanda comanda) throws ServicesException {
         if (!comanda.getStatus().equals(TipStatus.pending))
-            throw new ValidationException("Comanda selectata nu este in procesare!");
+            throw new ServicesException("Comanda selectata nu este in procesare!");
         comandaRepository.update(comanda.getId(), TipStatus.canceled);
-        notifyObservers(new ComandaChangeEvent(EventType.ANULEAZA, null));
+        notifyObservers(new ChangeEvent(EventType.ANULEAZA));
     }
 
     public List<Medicament> findMedicamenteByNume(String nume) {
@@ -108,7 +108,7 @@ public class Service  implements Observable {
                 mc.setId(id);
                 medicamentComandaRepository.save(mc);
             }
-            notifyObservers(new ComandaChangeEvent(EventType.EFECTUEAZA, null));
+            notifyObservers(new ChangeEvent(EventType.EFECTUEAZA));
         }
         catch(ValidationException ex){
             throw new ServicesException(ex.getMessage());
@@ -117,29 +117,51 @@ public class Service  implements Observable {
 
     public void acceptaComanda(Comanda comanda) throws ServicesException {
         if (!comanda.getStatus().equals(TipStatus.pending))
-            throw new ValidationException("Comanda selectata nu este in procesare!");
+            throw new ServicesException("Comanda selectata nu este in procesare!");
         for (MedicamentComanda mc : comanda.getMedicamente())
             if (mc.getMedicament().getCantitateTotala() < mc.getCantitate())
-                throw new ValidationException("Stoc indisponibil!");
+                throw new ServicesException("Stoc indisponibil!");
 
         comandaRepository.update(comanda.getId(), TipStatus.approved);
         for(MedicamentComanda mc : comanda.getMedicamente()){
             int cantitate = mc.getMedicament().getCantitateTotala() - mc.getCantitate();
             medicamentRepository.update(mc.getMedicament().getId(), cantitate);
-            notifyObservers(new ComandaChangeEvent(EventType.ACCEPTA, null));
         }
+        notifyObservers(new ChangeEvent(EventType.ACCEPTA));
     }
 
     public void refuzaComanda(Comanda comanda) throws ServicesException {
         if (!comanda.getStatus().equals(TipStatus.pending))
-            throw new ValidationException("Comanda selectata nu este in procesare!");
+            throw new ServicesException("Comanda selectata nu este in procesare!");
         try{
             comandaRepository.update(comanda.getId(), TipStatus.rejected);
-            notifyObservers(new ComandaChangeEvent(EventType.REFUZA, null));
+            notifyObservers(new ChangeEvent(EventType.REFUZA));
         }
         catch(ValidationException ex){
             throw new ServicesException("Eroare la refuzarea comenzii" + ex);
         }
+    }
+
+    public void adaugaMedicament(Medicament medicament) throws ServicesException {
+        try {
+            medicamentValidator.validate(medicament);
+        } catch(ValidationException ex) {
+            throw new ServicesException(ex.getMessage());
+        }
+        medicamentRepository.save(medicament);
+        notifyObservers(new ChangeEvent(EventType.ADAUGA_MEDICAMENT));
+    }
+
+    public void stergeMedicament(Medicament medicament) {
+        medicamentRepository.delete(medicament);
+        notifyObservers(new ChangeEvent(EventType.ELIMINA_MEDICAMENT));
+    }
+
+    public void actualizeazaMedicament(Integer medicamentId, Integer cantitate) throws ServicesException {
+        if (cantitate < 0)
+            throw new ServicesException("Cantitatea trebuie sa fie pozitiva!");
+        medicamentRepository.update(medicamentId, cantitate);
+        notifyObservers(new ChangeEvent(EventType.ACTUALIZEAZA_MEDICAMENT));
     }
 
     private List<Observer> observers = new ArrayList<Observer>();
@@ -147,11 +169,6 @@ public class Service  implements Observable {
     @Override
     public void addObserver(Observer e) {
         observers.add(e);
-    }
-
-    @Override
-    public void removeObserver(Observer e) {
-        observers.remove(e);
     }
 
     @Override

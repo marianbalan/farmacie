@@ -79,13 +79,9 @@ public class FarmacistController implements RolController, Observer {
     }
 
     public void initComenziModel() {
-        try {
-            comenziModel.clear();
-            List<Comanda> comenzi = StreamSupport.stream(service.findAllOrders().spliterator(), false).collect(Collectors.toList());
-            comenziModel.setAll(comenzi);
-        } catch (ServicesException ex) {
-            MessageAlert.showErrorMessage(null, ex.getMessage());
-        }
+        comenziModel.clear();
+        List<Comanda> comenzi = StreamSupport.stream(service.findAllOrders().spliterator(), false).collect(Collectors.toList());
+        comenziModel.setAll(comenzi);
     }
 
     public void initMedicamenteModel(Comanda comanda) {
@@ -158,5 +154,27 @@ public class FarmacistController implements RolController, Observer {
         } catch (ServicesException ex) {
             MessageAlert.showErrorMessage(null, ex.getMessage());
         }
+    }
+
+    private void loadMedicamenteStage() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/views/farmacistGestionareMedicamenteView.fxml"));
+        AnchorPane rootLayout = loader.load();
+        stage.setScene(new Scene(rootLayout));
+        MedicamenteController controller = loader.getController();
+        controller.setService(service);
+        controller.setFarmacist(farmacist);
+        stage.show();
+    }
+
+    @FXML
+    public void handleGestioneaza() throws IOException {
+//        try {
+//            loadMedicamenteStage();
+//        } catch (IOException ex) {
+//            MessageAlert.showErrorMessage(null, ex.getMessage());
+//        }
+        loadMedicamenteStage();
     }
 }

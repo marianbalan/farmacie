@@ -33,7 +33,7 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-      <Button layoutX="357.0" layoutY="327.0" mnemonicParsing="false" text="Gestionare medicamente" />
+      <Button layoutX="357.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleGestioneaza" text="Gestionare medicamente" />
       <TextField fx:id="nameTextField" layoutX="591.0" layoutY="327.0" />
       <Button layoutX="640.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout" textFill="#c70000" />
     </children>

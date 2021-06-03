@@ -14,14 +14,6 @@ public class Medicament extends Entity<Integer> {
     private TipMedicament tip;
     private Integer cantitateTotala;
 
-//    @OneToMany(
-//            targetEntity = MedicamentComanda.class,
-//            mappedBy = "medicament",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    private List<MedicamentComanda> comenzi = new ArrayList<>();
-
     public Medicament() {
     }
 
@@ -78,14 +70,6 @@ public class Medicament extends Entity<Integer> {
     public void setCantitateTotala(Integer cantitateTotala) {
         this.cantitateTotala = cantitateTotala;
     }
-
-//    public List<MedicamentComanda> getComenzi() {
-//        return comenzi;
-//    }
-//
-//    public void setComenzi(List<MedicamentComanda> comenzi) {
-//        this.comenzi = comenzi;
-//    }
 
     @Override
     public String toString() {

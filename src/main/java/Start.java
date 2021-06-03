@@ -67,7 +67,7 @@ public class Start extends Application {
         MedicRepository medicRepository = new BDMedicRepository(sessionFactory);
         MedicamentRepository medicamentRepository = new BDMedicamentRepository(sessionFactory);
         MedicamentComandaRepository medicamentComandaRepository = new BDMedicamentComandaRepository(props, medicamentRepository);
-        ComandaRepository comandaRepository = new BDComandaRepositoryClasic(props, medicamentComandaRepository);
+        ComandaRepository comandaRepository = new BDComandaRepository(props, medicamentComandaRepository);
 
 
         Validator<Medicament> medicamentValidator = new MedicamentValidator();

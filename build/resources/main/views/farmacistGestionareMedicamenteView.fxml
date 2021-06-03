@@ -4,14 +4,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="422.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionareMedicamenteController">
+<AnchorPane prefHeight="422.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MedicamenteController">
     <children>
-        <TableView layoutX="39.0" layoutY="70.0" prefHeight="255.0" prefWidth="382.0">
+        <TableView fx:id="medicamenteTable" layoutX="39.0" layoutY="70.0" prefHeight="255.0" prefWidth="382.0">
             <columns>
-                <TableColumn prefWidth="126.20001220703125" text="Nume" />
-                <TableColumn minWidth="9.20001220703125" prefWidth="100.19992065429688" text="Producator" />
-                <TableColumn prefWidth="80.800048828125" text="Tip" />
-                <TableColumn prefWidth="75.0" text="Cantitate" />
+                <TableColumn fx:id="numeColumn" prefWidth="126.20001220703125" text="Nume" />
+                <TableColumn fx:id="producatorColumn" minWidth="9.20001220703125" prefWidth="100.19992065429688" text="Producator" />
+                <TableColumn fx:id="tipColumn" prefWidth="80.800048828125" text="Tip" />
+                <TableColumn fx:id="cantitateColumn" prefWidth="75.0" text="Cantitate" />
             </columns>
         </TableView>
         <Label layoutX="182.0" layoutY="41.0" text="Medicamente">
@@ -19,21 +19,16 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-      <TextField layoutX="450.0" layoutY="112.0" prefHeight="26.0" prefWidth="289.0" />
-      <TextField layoutX="450.0" layoutY="162.0" prefHeight="26.0" prefWidth="290.0" />
-      <SplitMenuButton layoutX="449.0" layoutY="209.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="290.0">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </SplitMenuButton>
-      <Spinner layoutX="450.0" layoutY="260.0" prefHeight="26.0" prefWidth="290.0" />
-      <Button layoutX="163.0" layoutY="339.0" mnemonicParsing="false" text="Eliminare medicament" />
+      <TextField fx:id="numeTextbox" layoutX="450.0" layoutY="112.0" prefHeight="26.0" prefWidth="289.0" />
+      <TextField fx:id="producatorTextbox" layoutX="450.0" layoutY="162.0" prefHeight="26.0" prefWidth="290.0" />
+      <Spinner fx:id="cantitateSpinner" editable="true" layoutX="450.0" layoutY="260.0" prefHeight="26.0" prefWidth="290.0" />
+      <Button layoutX="163.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleElimina" text="Eliminare medicament" />
       <Label layoutX="451.0" layoutY="93.0" text="Nume:" />
       <Label layoutX="450.0" layoutY="143.0" text="Producator:" />
       <Label layoutX="450.0" layoutY="190.0" text="Tip:" />
       <Label layoutX="450.0" layoutY="241.0" text="Cantitate:" />
-      <Button layoutX="447.0" layoutY="300.0" mnemonicParsing="false" text="Adaugare medicament" />
-      <Button layoutX="597.0" layoutY="300.0" mnemonicParsing="false" text="Actualizare medicament" />
+      <Button layoutX="447.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleAdauga" text="Adaugare medicament" />
+      <Button layoutX="597.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleActualizeaza" text="Actualizare medicament" />
+      <ComboBox fx:id="tipComboList" layoutX="451.0" layoutY="211.0" prefHeight="26.0" prefWidth="290.0" />
     </children>
 </AnchorPane>

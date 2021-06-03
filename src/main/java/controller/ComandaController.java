@@ -89,13 +89,9 @@ public class ComandaController {
     }
 
     public void initMedicamenteModel() {
-        try {
-            medicamenteDModel.clear();
-            List<Medicament> medicamente = StreamSupport.stream(service.findAllMedicamente().spliterator(), false).collect(Collectors.toList());
-            medicamenteDModel.setAll(medicamente);
-        } catch (ServicesException ex) {
-            MessageAlert.showErrorMessage(null, ex.getMessage());
-        }
+        medicamenteDModel.clear();
+        List<Medicament> medicamente = StreamSupport.stream(service.findAllMedicamente().spliterator(), false).collect(Collectors.toList());
+        medicamenteDModel.setAll(medicamente);
     }
 
 
@@ -119,14 +115,10 @@ public class ComandaController {
     @FXML
     public void handleCauta() {
         String nume = numeTextbox.getText();
-        try {
-            List<Medicament> medicamente = nume.equals("") ? StreamSupport.stream(service.findAllMedicamente().spliterator(), false).collect(Collectors.toList())
+        List<Medicament> medicamente = nume.equals("") ? StreamSupport.stream(service.findAllMedicamente().spliterator(), false).collect(Collectors.toList())
                     : service.findMedicamenteByNume(nume);
-            medicamenteDModel.clear();
-            medicamenteDModel.setAll(medicamente);
-        } catch(ServicesException ex) {
-            MessageAlert.showErrorMessage(null, ex.getMessage());
-        }
+        medicamenteDModel.clear();
+        medicamenteDModel.setAll(medicamente);
     }
 
     @FXML

@@ -80,13 +80,9 @@ public class MedicController implements RolController, Observer {
     }
 
     public void initComenziModel() {
-        try {
-            comenziModel.clear();
-            List<Comanda> comenzi = StreamSupport.stream(service.findMyOrders(medic).spliterator(), false).collect(Collectors.toList());
-            comenziModel.setAll(comenzi);
-        } catch (ServicesException ex) {
-            MessageAlert.showErrorMessage(null, ex.getMessage());
-        }
+        comenziModel.clear();
+        List<Comanda> comenzi = StreamSupport.stream(service.findMyOrders(medic).spliterator(), false).collect(Collectors.toList());
+        comenziModel.setAll(comenzi);
     }
 
     public void initMedicamenteModel(Comanda comanda) {
